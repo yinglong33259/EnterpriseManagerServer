@@ -36,6 +36,9 @@ dependencies {
     compile group: 'org.aspectj', name: 'aspectjrt', version: '1.9.1'
     compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.1'
 
+    compile group: 'org.apache.shiro', name: 'shiro-core', version: '1.4.0'
+    compile group: 'org.apache.shiro', name: 'shiro-spring', version: '1.4.0'
+
     compile fileTree(dir:'libs/netty',include:['*.jar'])
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
