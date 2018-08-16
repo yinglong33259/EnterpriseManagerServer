@@ -2,6 +2,7 @@ package com.system.core.shiro;
 
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
+import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -9,9 +10,11 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.LinkedHashMap;
 
+@Configuration
 public class ShiroConfiguration {
 //    @Bean(name="shiroFilter")
 //    public ShiroFilterFactoryBean shiroFilter(@Qualifier("securityManager") SecurityManager manager) {
@@ -36,9 +39,9 @@ public class ShiroConfiguration {
 
     //配置核心安全事务管理器
     @Bean("securityManager")
-    public DefaultWebSecurityManager getManager(MyShiroRealm myShiroRealm) {
-        System.out.println("加载SHIRO成功");
-        DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
+    public SecurityManager getManager(MyShiroRealm myShiroRealm) {
+        System.out.println("加载SHIRO成功2");
+        SecurityManager manager = new SecurityManager();
         // 使用自己的realm
         manager.setRealm(myShiroRealm);
         /*
@@ -78,6 +81,7 @@ public class ShiroConfiguration {
     }
     @Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(@Qualifier("securityManager") DefaultWebSecurityManager manager) {
+        System.out.println("加载SHIRO成功1");
         AuthorizationAttributeSourceAdvisor advisor=new AuthorizationAttributeSourceAdvisor();
         advisor.setSecurityManager(manager);
         return advisor;

@@ -13,6 +13,8 @@ import com.boot.entity.ResponseResult;
 import com.boot.utils.JsonUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.json.JSONException;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,13 @@ public class ServiceController {
     )
     @ResponseBody
     public String doService(HttpServletRequest request, HttpServletResponse response, @PathVariable String serviceName, @PathVariable String funcName) throws BeansException, JSONException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, Exception {
+
+        Subject subject = SecurityUtils.getSubject();
+        if (subject.isAuthenticated()) {
+
+        } else {
+
+        }
         ResponseResult result = new ResponseResult();
         if (!this.context.containsBean(serviceName)) {
             logger.info("请求无对应服务 " + serviceName + "." + funcName);
