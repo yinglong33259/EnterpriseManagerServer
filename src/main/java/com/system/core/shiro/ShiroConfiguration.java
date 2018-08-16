@@ -53,7 +53,7 @@ public class ShiroConfiguration {
         return manager;
     }
 
-//    //配置自定义的权限登录器
+    //    //配置自定义的权限登录器
 //    @Bean(name="authRealm")
 //    public AuthRealm authRealm(@Qualifier("credentialsMatcher") CredentialsMatcher matcher) {
 //        AuthRealm authRealm=new AuthRealm();
