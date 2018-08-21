@@ -13,4 +13,7 @@ public interface UserService {
 
     public Page<TUser> findByCondition(TUser user, FrameworkPageable fpa, Map[] sortMap);
 
+    public List<TUser> findAll();
+
+    public String getRedisData();
 }

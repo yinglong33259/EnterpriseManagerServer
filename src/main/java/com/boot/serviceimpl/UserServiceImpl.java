@@ -9,14 +9,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Component("userService")
 public class UserServiceImpl implements UserService {
+
+    @Resource
+    private RedisTemplate redisTemplate;
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
     UserRepository userRepository;
@@ -44,6 +52,16 @@ public class UserServiceImpl implements UserService {
                 user.getEmail(),
                 user.getAddr(),
                 PageRequest.of(fpa.getPageNo() - 1, fpa.getPageSize(), sortHandler(sortMap)));
+    }
+
+    @Override
+    public List<TUser> findAll() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public String getRedisData() {
+        return stringRedisTemplate.opsForValue().get("test");
     }
 
 

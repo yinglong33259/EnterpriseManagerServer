@@ -4,8 +4,12 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user", schema = "test", catalog = "")
+@Table(name = "t_user", schema = "test", catalog = "")
 public class TUser {
+    private int id;
+    private String password;
+    private String salt;
+    private String loginId;
     private String name;
     private Integer age;
     private String sex;
@@ -13,7 +17,47 @@ public class TUser {
     private String email;
     private String addr;
 
+    @Basic
+    @Column(name = "id")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Basic
+    @Column(name = "password")
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Basic
+    @Column(name = "salt")
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
     @Id
+    @Column(name = "login_id")
+    public String getLoginId() {
+        return loginId;
+    }
+
+    public void setLoginId(String loginId) {
+        this.loginId = loginId;
+    }
+
+    @Basic
     @Column(name = "name")
     public String getName() {
         return name;
@@ -78,7 +122,11 @@ public class TUser {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TUser tUser = (TUser) o;
-        return Objects.equals(name, tUser.name) &&
+        return id == tUser.id &&
+                Objects.equals(password, tUser.password) &&
+                Objects.equals(salt, tUser.salt) &&
+                Objects.equals(loginId, tUser.loginId) &&
+                Objects.equals(name, tUser.name) &&
                 Objects.equals(age, tUser.age) &&
                 Objects.equals(sex, tUser.sex) &&
                 Objects.equals(tel, tUser.tel) &&
@@ -88,7 +136,6 @@ public class TUser {
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(name, age, sex, tel, email, addr);
+        return Objects.hash(id, password, salt, loginId, name, age, sex, tel, email, addr);
     }
 }

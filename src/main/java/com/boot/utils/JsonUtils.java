@@ -14,11 +14,12 @@ public class JsonUtils {
         if(object instanceof List){
             JSONArray jsonObject = (JSONArray) JSONArray.toJSON(object);
             jsonStr = jsonObject.toString();
+        }else if(object instanceof String){
+            jsonStr = (String) object;
         }else{
             JSONObject jsonObject = (JSONObject) JSONObject.toJSON(object);
             jsonStr = jsonObject.toString();
         }
-        System.out.println(jsonStr);
         return jsonStr;
     }
 
