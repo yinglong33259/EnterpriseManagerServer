@@ -18,3 +18,7 @@ spring:
     port: 6379
     host: localhost
     password:
+customer:
+  quartz:
+    cron:
+      TestJob: "*/5 * * * * ?"
