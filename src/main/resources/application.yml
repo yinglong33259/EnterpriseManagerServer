@@ -18,7 +18,20 @@ spring:
     port: 6379
     host: localhost
     password:
+  kafka:
+    consumer:
+      group-id: test-consumer-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    bootstrap-servers: 192.168.103.68:9092,192.168.103.68:9093,192.168.103.68:9094
 customer:
   quartz:
     cron:
-      TestJob: "*/5 * * * * ?"
+      TestJob: "*/10 * * * * ?"
+  kafka:
+    topic:
+      test: "my-replicated-topic"

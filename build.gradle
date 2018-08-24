@@ -17,13 +17,19 @@ buildscript {
     }
 }
 dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-parent', version: '2.0.3.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version: '2.0.3.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.0.3.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.0.3.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: '2.0.3.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-quartz', version: '2.0.3.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-dependencies', version: '2.0.3.RELEASE'
+
     compile 'org.springframework.data:spring-data-jpa:2.0.3.RELEASE'
     compile group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.0'
+    compile group: 'org.apache.kafka', name: 'kafka_2.12', version: '2.0.0'
+    compile group: 'org.apache.kafka', name: 'kafka-clients', version: '2.0.0'
+    compile group: 'org.springframework.kafka', name: 'spring-kafka', version: '2.1.9.RELEASE'
 
     compile group: 'org.springframework', name: 'spring-webmvc', version: '4.3.8.RELEASE'
     compile group: 'org.springframework', name: 'spring-context', version: '4.3.8.RELEASE'

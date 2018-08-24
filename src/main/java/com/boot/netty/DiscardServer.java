@@ -10,6 +10,8 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
+import java.util.BitSet;
+
 /**
  * Discards any incoming data.
  */
@@ -51,12 +53,18 @@ public class DiscardServer {
     }
 
     public static void main(String[] args) throws Exception {
-        int port;
-        if (args.length > 0) {
-            port = Integer.parseInt(args[0]);
-        } else {
-            port = 8080;
-        }
-        new DiscardServer(port).run();
+//        int port;
+//        if (args.length > 0) {
+//            port = Integer.parseInt(args[0]);
+//        } else {
+//            port = 8080;
+//        }
+//        new DiscardServer(port).run();
+
+        BitSet bs = new BitSet();
+        bs.set(1,true);
+        bs.set(2,true);
+        bs.set(5,true);
+        bs.get(6);
     }
 }
