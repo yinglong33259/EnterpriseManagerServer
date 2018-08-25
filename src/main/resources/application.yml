@@ -24,14 +24,15 @@ spring:
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      bootstrap-servers: 192.168.48.128:9092
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
-    bootstrap-servers: 192.168.103.68:9092,192.168.103.68:9093,192.168.103.68:9094
+      bootstrap-servers: 192.168.48.128:9093
 customer:
   quartz:
     cron:
-      TestJob: "*/10 * * * * ?"
+      TestJob: "* */10 * * * ?"
   kafka:
     topic:
-      test: "my-replicated-topic"
+      test: "test"
