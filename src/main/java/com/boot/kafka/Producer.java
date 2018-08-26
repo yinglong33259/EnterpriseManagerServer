@@ -1,6 +1,5 @@
 package com.boot.kafka;
 
-import com.system.core.utils.ServiceUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class Producer {
-    private static final Log logger = LogFactory.getLog(ServiceUtils.class);
+    private static final Log logger = LogFactory.getLog(Producer.class);
 
     @Autowired
     private KafkaTemplate kafkaTemplate;

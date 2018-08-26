@@ -31,8 +31,9 @@ spring:
       bootstrap-servers: 192.168.48.128:9093
 customer:
   quartz:
+    available_job: "testJob"
     cron:
-      TestJob: "* */10 * * * ?"
+      testJob: "*/5 * * * * ?"
   kafka:
     topic:
       test: "test"
