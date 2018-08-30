@@ -53,10 +53,11 @@ public class QuartzConfig {
         String[] available_job = this.env.getProperty("customer.quartz.available_job").split(",");
 
         for (int i=0; i<available_job.length; i++){
+            if("".equals(available_job[i])) continue;
             JobDetail jobdetail = (JobDetail) this.context.getBean( available_job[i]+"Detail" );
             Trigger trigger = (Trigger) this.context.getBean( available_job[i]+"Trigger" );
             scheduler.scheduleJob(jobdetail,trigger);
-            logger.info("Quartz Job -"+available_job[i]+"- load success !!! ");
+            logger.info("Quartz Job ***"+available_job[i]+"*** load success !!! ");
         }
         logger.info("Quartz Job config end <<< ");
         return scheduler;
