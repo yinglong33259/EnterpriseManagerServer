@@ -9,11 +9,13 @@ import java.util.Map;
 
 public interface UserService {
 
-    public List<TUser> getUser(TUser user);
+    public List<TUser> findByCondition(TUser user);
 
     public Page<TUser> findByCondition(TUser user, FrameworkPageable fpa, Map[] sortMap);
 
     public List<TUser> findAll();
 
     public String getRedisData();
+
+    public boolean addUser(TUser user);
 }

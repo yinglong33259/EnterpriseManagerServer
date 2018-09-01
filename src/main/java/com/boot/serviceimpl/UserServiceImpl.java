@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
 
     @Override
-    public List<TUser> getUser(TUser user){
+    public List<TUser> findByCondition(TUser user){
         List<TUser> list = userRepository.findByCondition(
                 user.getName(),
                 user.getAge(),
@@ -94,6 +94,11 @@ public class UserServiceImpl implements UserService {
         list.add(a);
         list.add(b);
         return list;
+    }
+
+    public boolean addUser(TUser user){
+        userRepository.save(user);
+        return true;
     }
 
 }

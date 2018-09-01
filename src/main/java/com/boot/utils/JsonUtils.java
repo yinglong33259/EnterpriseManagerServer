@@ -10,17 +10,19 @@ import java.util.List;
 
 public class JsonUtils {
     public static String object2Json(Object object){
-        String jsonStr;
+
+        JSONObject result = new JSONObject();
+
         if(object instanceof List){
             JSONArray jsonObject = (JSONArray) JSONArray.toJSON(object);
-            jsonStr = jsonObject.toString();
+            result.put("data", jsonObject);
         }else if(object instanceof String){
-            jsonStr = (String) object;
+            result.put("data", object);
         }else{
             JSONObject jsonObject = (JSONObject) JSONObject.toJSON(object);
-            jsonStr = jsonObject.toString();
+            result.put("data", jsonObject);
         }
-        return jsonStr;
+        return result.toString();
     }
 
     public static Object[] json2Object(String jsonStr, Class<?>[] paramTypes){
