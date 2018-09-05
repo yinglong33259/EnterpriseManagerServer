@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Page<TUser> findByCondition(TUser user, FrameworkPageable fpa, Map[] sortMap) {
+    public Page<TUser> findByConditionPage(TUser user, FrameworkPageable fpa, Map[] sortMap) {
 
         return userRepository.findByCondition(
                 user.getName(),
@@ -97,6 +97,8 @@ public class UserServiceImpl implements UserService {
     }
 
     public boolean addUser(TUser user){
+        user.setLoginId(user.getName());
+        user.setPassword(user.getName());
         userRepository.save(user);
         return true;
     }

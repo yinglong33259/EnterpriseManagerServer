@@ -18,6 +18,8 @@ public class JsonUtils {
             result.put("data", jsonObject);
         }else if(object instanceof String){
             result.put("data", object);
+        }else if(object instanceof Boolean){
+                result.put("data", object );
         }else{
             JSONObject jsonObject = (JSONObject) JSONObject.toJSON(object);
             result.put("data", jsonObject);

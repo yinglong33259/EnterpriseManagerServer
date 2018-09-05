@@ -88,22 +88,22 @@ DROP TABLE IF EXISTS `t_user`;
 
 CREATE TABLE `t_user` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
-  `password` varchar(50) NOT NULL,
-  `salt` varchar(50) NOT NULL,
+  `password` varchar(50) DEFAULT NULL,
+  `salt` varchar(50) DEFAULT NULL,
   `login_id` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `age` int(10) DEFAULT NULL,
-  `sex` varchar(4) DEFAULT NULL,
+  `sex` varchar(10) DEFAULT NULL,
   `tel` varchar(20) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `addr` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`login_id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 /*Data for the table `t_user` */
 
-insert  into `t_user`(`id`,`password`,`salt`,`login_id`,`name`,`age`,`sex`,`tel`,`email`,`addr`) values (1,'','','Jack Huang','Jack Huang',24,'男','564987','231354','5449687'),(2,'','','Tom','Tom',33,'男','45654','2432','32玩儿'),(3,'','','凤姐','凤姐',22,'女','95463','930012617@qq.com','qwesdadasd'),(4,'','','华盛顿','华盛顿',100,'男','1855','943003097@qq.com','asdas'),(5,'','','史珍香','史珍香',25,'女','185523423','943003097@qq.com','aasd'),(6,'','','周杰伦','周杰伦',43,'男','18552342354','943003097@qq.com','asd'),(7,'','','波多野结衣','波多野结衣',28,'女','9564','6532','325698'),(8,'','','潮汐海灵','潮汐海灵',55,'男','35654987','1312','234234234'),(9,'','','牛耀伦','牛耀伦',88,'男','18552342354','943003097@qq.com','asdasdqwe'),(10,'','','肾结石','肾结石',60,'男','18552342354','943003097@qq.com','qweqw'),(11,'','','诺克萨斯','诺克萨斯',523,'男','795465','24234234','234234234'),(12,'','','马化腾','马化腾',50,'男','18552342354','943003097@qq.com','vfdgsdf');
+insert  into `t_user`(`id`,`password`,`salt`,`login_id`,`name`,`age`,`sex`,`tel`,`email`,`addr`) values (0,'123123',NULL,'123123','123123',323,'Man','123123','qweqwe@11','qweqweqweqweqwe'),(0,'123123123',NULL,'123123123','123123123',123,'Woman','123123','12312@qq','qweqweqwee'),(21,'Babay',NULL,'Babay','Babay',15,'Woman','1234567','943003087@qq.com','xssadasdasd'),(15,'huanfg',NULL,'huanfg','huanfg',123,'Woman','huanfg','huanfg@xn--df3a69q','阿斯达岁的'),(0,'huangxs',NULL,'huangxs','huangxs',24,'Man','123123','sdfsdf@qq.com','asdasdasd'),(1,'','','Jack Huang','Jack Huang',24,'男','564987','231354','5449687'),(16,'SB',NULL,'SB','SB',123,'Man','123123','231@qq','qweqweqwe'),(0,'test',NULL,'test','test',111,'Woman','1212','1212@qq.com','xsxsxs'),(19,'test222',NULL,'test222','test222',2123,'Man','qweqwe','qweqwe@ww','qweqweqweqwe'),(2,'','','Tom','Tom',33,'男','45654','2432','32玩儿'),(3,'','','凤姐','凤姐',22,'女','95463','930012617@qq.com','qwesdadasd'),(4,'','','华盛顿','华盛顿',100,'男','1855','943003097@qq.com','asdas'),(5,'','','史珍香','史珍香',25,'女','185523423','943003097@qq.com','aasd'),(6,'','','周杰伦','周杰伦',43,'男','18552342354','943003097@qq.com','asd'),(7,'','','波多野结衣','波多野结衣',28,'女','9564','6532','325698'),(8,'','','潮汐海灵','潮汐海灵',55,'男','35654987','1312','234234234'),(9,'','','牛耀伦','牛耀伦',88,'男','18552342354','943003097@qq.com','asdasdqwe'),(10,'','','肾结石','肾结石',60,'男','18552342354','943003097@qq.com','qweqw'),(11,'','','诺克萨斯','诺克萨斯',523,'男','795465','24234234','234234234'),(12,'','','马化腾','马化腾',50,'男','18552342354','943003097@qq.com','vfdgsdf'),(20,'黄晓山',NULL,'黄晓山','黄晓山',111,'Woman','1212','1212@qq.com','xsxsxs');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

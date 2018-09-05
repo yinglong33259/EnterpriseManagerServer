@@ -11,7 +11,7 @@ public interface UserService {
 
     public List<TUser> findByCondition(TUser user);
 
-    public Page<TUser> findByCondition(TUser user, FrameworkPageable fpa, Map[] sortMap);
+    public Page<TUser> findByConditionPage(TUser user, FrameworkPageable fpa, Map[] sortMap);
 
     public List<TUser> findAll();
 

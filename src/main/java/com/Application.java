@@ -18,17 +18,17 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan
 public class Application extends SpringBootServletInitializer {
 
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
-
-//    @Override
-//    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-//        return application.sources(Application.class);
-//    }
-//
-//    public static void main(String[] args) throws Exception {
+//    public static void main(String[] args) {
 //        SpringApplication.run(Application.class, args);
 //    }
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(Application.class);
+    }
+
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(Application.class, args);
+    }
 
 }
