@@ -2,21 +2,20 @@ package com.system.core.controller;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.system.core.bean.ServiceException;
+import com.system.core.bean.ServiceExceptionResult;
 import com.system.core.utils.ServiceUtils;
-import com.boot.entity.ResponseResult;
+import com.system.core.bean.ResponseResult;
 import com.boot.utils.JsonUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
-import org.json.JSONException;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -27,31 +26,35 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class ServiceController {
     private static final Log logger = LogFactory.getLog(ServiceController.class);
-    @Autowired(
-            required = true
-    )
-    private ApplicationContext context;
-    @Autowired(
-            required = true
-    )
 
-    public ServiceController() {
-    }
+    @Autowired( required = true )
+    private ApplicationContext context;
+
+    @Autowired(required = true)
+    public ServiceController() {}
 
     @RequestMapping(
             value = {"/service/{serviceName}/{funcName}"},
             produces = {"text/plain;charset=UTF-8"}
     )
     @ResponseBody
-    public String doService(HttpServletRequest request, HttpServletResponse response, @PathVariable String serviceName, @PathVariable String funcName) throws BeansException, JSONException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, Exception {
+    public Object doService(HttpServletRequest request, HttpServletResponse response, @PathVariable String serviceName, @PathVariable String funcName)  {
+
+        ResponseResult result = new ResponseResult();
 
         Subject subject = SecurityUtils.getSubject();
         if (subject.isAuthenticated()) {
 
+        } else if( "userService".equals(serviceName) && "login".equals(funcName) ) {
+            result.setErrorCode(0001);
+            result.setErrorMsg("auth error!");
+            return JsonUtils.object2Json(result);
         } else {
-
+            result.setErrorCode(0001);
+            result.setErrorMsg("auth error!");
+            return JsonUtils.object2Json(result);
         }
-        ResponseResult result = new ResponseResult();
+
         if (!this.context.containsBean(serviceName)) {
             logger.info("请求无对应服务 " + serviceName + "." + funcName);
             response.setHeader("error_code", "104");
@@ -72,22 +75,21 @@ public class ServiceController {
                 }
             }
 
-            Object data = ServiceUtils.callService(service, serviceName, funcName, params );
-//            result.setData(data == null ? null : this.frameworkJsonService.toJson(data));
-//            response.setHeader("error_code", "200");
-//            CurrentSessionStore store = CurrentSessionStoreFactory.getCurrentSessionStore();
-//            FrameworkSession session = store.getCurrentSession();
-//            if (session != null) {
-//                try {
-//                    session.touchSession();
-//                    SessionCookieUtils.setSessionCookies(request, response, session);
-//                } catch (InvalidSessionException var12) {
-//                    SessionCookieUtils.delSessionCookies(request, response);
-//                }
-//            }
-//
-            String resultJson = JsonUtils.object2Json(data);
-            return resultJson;
+            Object data = null;
+            try {
+                data = ServiceUtils.callService(service, serviceName, funcName, params );
+                result.setData( JsonUtils.object2Json(data) );
+            } catch (ServiceException e){
+                result.setErrorCode(e.getErrCode());
+                result.setErrorMsg(e.getErrMessage());
+            } catch (Exception e) {
+                result.setErrorCode(0000);
+                result.setErrorMsg("unknown error");
+            }
+
         }
+
+        return JsonUtils.object2Json(result);
+
     }
 }

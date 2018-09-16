@@ -2,6 +2,7 @@ package com.system.core.utils;
 
 import com.boot.utils.JsonUtils;
 import com.system.core.StaticCache;
+import com.system.core.bean.ServiceException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONArray;
@@ -18,7 +19,14 @@ import java.util.Map;
 public class ServiceUtils {
     private static final Log logger = LogFactory.getLog(ServiceUtils.class);
 
-    public static Object callService(Object service, String serviceName, String funcName, Map<String, String> params) throws MethodInvocationException, JSONException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public static Object callService(Object service, String serviceName, String funcName, Map<String, String> params)
+            throws
+            ServiceException,
+            MethodInvocationException,
+            JSONException,
+            IllegalAccessException,
+            IllegalArgumentException,
+            InvocationTargetException {
 
         if (params == null) {
             params = new LinkedHashMap<>();

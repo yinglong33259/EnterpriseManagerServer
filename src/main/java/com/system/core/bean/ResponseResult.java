@@ -3,7 +3,7 @@
 // (powered by Fernflower decompiler)
 //
 
-package com.boot.entity;
+package com.system.core.bean;
 
 import java.io.Serializable;
 
