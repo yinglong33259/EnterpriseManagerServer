@@ -37,4 +37,13 @@ public class JsonUtils {
         }
         return objects;
     }
+
+    public static Object[] json2Array(String jsonStr) {
+        JSONArray jo = JSON.parseArray(jsonStr);
+        Object[] objects = new Object[jo.size()];
+        for(int i=0; i< jo.size(); i++){
+            objects[i] = jo.get(i).toString();
+        }
+        return objects;
+    }
 }

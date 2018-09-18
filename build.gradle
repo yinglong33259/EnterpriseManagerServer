@@ -44,6 +44,9 @@ dependencies {
 
     compile group: 'org.apache.shiro', name: 'shiro-core', version: '1.4.0'
     compile group: 'org.apache.shiro', name: 'shiro-spring', version: '1.4.0'
+    compile group: 'org.apache.shiro', name: 'shiro-cas', version: '1.4.0'
+    compile group: 'org.apache.oltu.oauth2', name: 'org.apache.oltu.oauth2.authzserver', version: '1.0.2'
+    compile group: 'org.apache.oltu.oauth2', name: 'org.apache.oltu.oauth2.resourceserver', version: '1.0.2'
 
     compile fileTree(dir:'libs/netty',include:['*.jar'])
     testCompile group: 'junit', name: 'junit', version: '4.12'

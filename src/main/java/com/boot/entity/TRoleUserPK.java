@@ -1,16 +1,17 @@
 package com.boot.entity;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Embeddable
 public class TRoleUserPK implements Serializable {
     private int roleId;
     private int userId;
 
     @Column(name = "role_id")
-    @Id
     public int getRoleId() {
         return roleId;
     }
@@ -20,7 +21,6 @@ public class TRoleUserPK implements Serializable {
     }
 
     @Column(name = "user_id")
-    @Id
     public int getUserId() {
         return userId;
     }

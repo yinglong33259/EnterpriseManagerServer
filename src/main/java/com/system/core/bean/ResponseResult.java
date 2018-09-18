@@ -12,7 +12,7 @@ public class ResponseResult implements Serializable {
     protected final String version = "1.0";
     protected int errorCode = 0;
     protected String errorMsg = null;
-    protected String data = "";
+    protected Object data = "";
 
     public ResponseResult() {
     }
@@ -25,11 +25,11 @@ public class ResponseResult implements Serializable {
         this.errorCode = errorCode;
     }
 
-    public String getData() {
+    public Object getData() {
         return this.data;
     }
 
-    public void setData(String data) {
+    public void setData(Object data) {
         this.data = data;
     }
 

@@ -1,5 +1,8 @@
 package com.boot.repository;
 
+import com.boot.entity.TRight;
+import com.boot.entity.TRole;
+import com.boot.entity.TRoleUser;
 import com.boot.entity.TUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -49,4 +52,20 @@ public interface UserRepository extends JpaRepository<TUser, String> {
             @Param("email") java.lang.String email ,
             @Param("addr") java.lang.String addr ,
             Pageable pageable);
+
+    @Query(value="select c from TUser c where "
+            + "c.loginId = :loginId and c.password = :password ")
+    public TUser findUserByLoginIdAndPwd(@Param("loginId")String loginId, @Param("password")String password);
+
+//    @Query(value="select ru from TRoleUser ru ")
+//    public List<TRoleUser> findAllRoles();
+
+    @Query(value="select r from TRole r, TRoleUser ru where "
+            + " ru.pk.userId = :userId and ru.pk.roleId = r.id ")
+    public List<TRole> findUserRoles(@Param("userId")java.lang.Integer userId);
+
+    @Query(value="select ri from TRight ri, TRole ro, TRoleUser ru, TRoleRight rr where "
+            + " ru.pk.userId = :userId and ru.pk.roleId = ro.id and rr.roleId = ro.id and ri.id = rr.rightId ")
+    public List<TRight> findUserRights(@Param("userId")java.lang.Integer userId);
+
 }

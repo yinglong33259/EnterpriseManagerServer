@@ -1,5 +1,7 @@
 package com.system.core.shiro;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
@@ -13,27 +15,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 
-import java.util.LinkedHashMap;
-
 @Configuration
 public class ShiroConfiguration {
+
+    private static final Log logger = LogFactory.getLog(ShiroConfiguration.class);
+
     @Bean(name="shiroFilter")
     public ShiroFilterFactoryBean shiroFilter(@Qualifier("securityManager") DefaultWebSecurityManager manager) {
         ShiroFilterFactoryBean bean=new ShiroFilterFactoryBean();
         bean.setSecurityManager( manager );
-        //配置登录的url和登录成功的url
-//        bean.setLoginUrl("/login");
-//        bean.setSuccessUrl("/home");
         //配置访问权限
-        LinkedHashMap<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/jsp/login.jsp*", "anon"); //表示可以匿名访问
-        filterChainDefinitionMap.put("/loginUser", "anon");
-        filterChainDefinitionMap.put("/logout*","anon");
-        filterChainDefinitionMap.put("/jsp/error.jsp*","anon");
-        filterChainDefinitionMap.put("/jsp/index.jsp*","authc");
-        filterChainDefinitionMap.put("/*", "anon");//表示需要认证才可以访问
-        filterChainDefinitionMap.put("/**", "anon");//表示需要认证才可以访问
-        filterChainDefinitionMap.put("/*.*", "anon");
+//        LinkedHashMap<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
+//        filterChainDefinitionMap.put("/loginService/login", "anon");
+//        filterChainDefinitionMap.put("/**", "user");
+//        filterChainDefinitionMap.put("/*.*", "user");
 //        bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return bean;
     }
@@ -41,7 +36,7 @@ public class ShiroConfiguration {
     //配置核心安全事务管理器
     @Bean("securityManager")
     public DefaultWebSecurityManager getManager(@Qualifier("myShiroRealm") MyShiroRealm myShiroRealm) {
-        System.out.println("加载SHIRO成功");
+        logger.info("加载SHIRO模块成功");
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         // 使用自己的realm
         manager.setRealm(myShiroRealm);
