@@ -10,8 +10,8 @@ public class CustomeShiroUtils {
         String tokenId = request.getHeader("tokenId");
         if (tokenId == null || "".equals(tokenId))
             return false;
-
-        Subject subject =  StaticShiroCache.getInstance().getByTokenId( tokenId  );
+        StaticShiroCache staticShiroCache = StaticShiroCache.getInstance();
+        Subject subject =  staticShiroCache.getByTokenId( tokenId  );
         if ( subject == null )
             return false;
         if ( subject.isPermitted("service."+serviceName+"."+funcName) ){
@@ -22,6 +22,14 @@ public class CustomeShiroUtils {
         }
         return false;
 
+    }
+
+    /**
+     * 校验TokenId是否失效
+     * @return
+     */
+    public static boolean checkTokenIdIsValid(String tokenId){
+        return StaticShiroCache.getInstance().checkTokenIdIsValid(tokenId);
     }
 
 }

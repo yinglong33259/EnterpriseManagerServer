@@ -64,5 +64,28 @@ public class StaticShiroCache {
         }
     }
 
+    /**
+     * 校验某个TokenId是否还有效
+     * @param tokenId
+     * @return
+     */
+    public boolean checkTokenIdIsValid(String tokenId) {
+
+        if( !this.cacheMap.containsKey(tokenId) ){
+            return false;
+        }
+
+        String principal = this.cacheMap.get(tokenId).getPrincipal().toString();
+        if( System.currentTimeMillis() - this.cacheMap3.get( tokenId ) > 0){
+            this.cacheMap.remove( tokenId );
+            this.cacheMap2.remove( principal );
+            this.cacheMap3.remove( tokenId );
+            logger.info( "Shiro Subject " +  principal + " 已经超时，清除缓存");
+            return false;
+        }else{
+            this.cacheMap3.put( principal, System.currentTimeMillis() + 30*60*1000 );
+            return true;
+        }
+    }
 
 }

@@ -43,4 +43,21 @@ public class LoginController {
         return JsonUtils.object2Json( result );
 
     }
+
+    @RequestMapping(
+            value = {"/loginService/checkToken"},
+            produces = {"text/plain;charset=UTF-8"}
+    )
+    @ResponseBody
+    public Object checkToken(HttpServletRequest request, HttpServletResponse response)  {
+
+        ResponseResult result = new ResponseResult();
+        String paramsStr = request.getParameter("params");
+        Object[] params = JsonUtils.json2Array( paramsStr );
+        String tokenId = (String) params[0];
+        result.setData( StaticShiroCache.getInstance().checkTokenIdIsValid( tokenId ) );
+        return JsonUtils.object2Json( result );
+
+    }
+
 }
