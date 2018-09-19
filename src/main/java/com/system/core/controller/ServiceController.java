@@ -8,13 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.system.core.bean.ServiceException;
 import com.system.core.shiro.CustomeShiroUtils;
-import com.system.core.shiro.StaticShiroCache;
 import com.system.core.utils.ServiceUtils;
 import com.system.core.bean.ResponseResult;
 import com.boot.utils.JsonUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;

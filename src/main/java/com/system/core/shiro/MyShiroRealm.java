@@ -60,15 +60,15 @@ public class MyShiroRealm extends AuthorizingRealm {
         UsernamePasswordToken upToken = (UsernamePasswordToken) token;
 
 
-        return getAccount(upToken.getUsername(), upToken.getPassword().toString() );
+        return getAccount(upToken.getUsername(), String.valueOf(upToken.getPassword()));
     }
 
     protected SimpleAccount getAccount(String username, String password) {
 
-        TUser user = userRepository.findUserByLoginIdAndPwd("admin","1");
+        TUser user = userRepository.findUserByLoginIdAndPwd(username,password);
 
         if (user == null) {
-            throw new LockedAccountException();
+            throw new AuthenticationException();
         }
 
         Session session = SecurityUtils.getSubject().getSession();

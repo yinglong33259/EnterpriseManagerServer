@@ -1,10 +1,10 @@
 package com.system.core.controller;
 
 import com.boot.utils.JsonUtils;
-import com.system.core.StaticCache;
 import com.system.core.bean.ResponseResult;
 import com.system.core.shiro.StaticShiroCache;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
@@ -34,13 +34,24 @@ public class LoginController {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
         token.setRememberMe(true);
-        subject.login(token);
+        try{
+            subject.login(token);
+            String tokenId = UUID.randomUUID().toString();
+            StaticShiroCache.getInstance().put( tokenId, subject );
 
-        String tokenId = UUID.randomUUID().toString();
-        StaticShiroCache.getInstance().put( tokenId, subject );
+            result.setData(tokenId);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return JsonUtils.object2Json( result );
+        }catch (AuthenticationException e){
+            result.setErrorCode(0002);
+            result.setErrorMsg("Login Error, Username or password Error!");
+            return JsonUtils.object2Json( result );
+        }
 
-        result.setData(tokenId);
-        return JsonUtils.object2Json( result );
 
     }
 

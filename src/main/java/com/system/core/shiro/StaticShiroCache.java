@@ -88,4 +88,22 @@ public class StaticShiroCache {
         }
     }
 
+    /**
+     * 清除某个Token
+     * @param tokenId
+     * @return
+     */
+    public void clearTonkenCache(String tokenId) {
+
+        if( !this.cacheMap.containsKey(tokenId) ){
+            return ;
+        }
+
+        String principal = this.cacheMap.get(tokenId).getPrincipal().toString();
+        this.cacheMap.remove( tokenId );
+        this.cacheMap2.remove( principal );
+        this.cacheMap3.remove( tokenId );
+        logger.info( "Shiro Subject " +  principal + " 已经登出");
+    }
+
 }
